@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h3>Que- Create 2 objects - parent and child. Attach methods to parent and use those methods in child object using parents prototype</h3>
+<pre>ans- 
+class Parent {
+  constructor(name) {
+    this.name = name;
+  }
+
+ 
+  greet() {
+    return `Hello, my name is ${this.name}.`;
+  }
+}
+
+class Child extends Parent {
+  constructor(name, age) {
+    super(name);
+    this.age = age;
+  }
+
+
+  sayAge() {
+    return `${this.name} is ${this.age} years old.`;
+  }
+}
+const parent = new Parent("John");
+const child = new Child("Alice", 5);
+
+
+console.log(parent.greet()); 
+console.log(child.greet()); 
+console.log(child.sayAge()); 
+</pre>
+<h3>Que- Write code to explain prototype chaining</h3>
+<pre>ans- // Parent object constructor
+function Parent(name) {
+  this.name = name;
+}
+Parent.prototype.greet = function () {
+  return `Hello, my name is ${this.name}.`;
+};
+const parent = new Parent("John");
+
+
+function Child(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Child.prototype = Object.create(Parent.prototype);
+
+
+Child.prototype.constructor = Child
+const child = new Child("Alice", 5);
+console.log(parent.greet()); 
+console.log(child.greet()); 
+</pre>
+
+
+<h3>Que-Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum for multiple arrays</h3>
+<pre>ans- 
+Array.prototype.sum = function () {
+  return this.reduce((total, current) => total + current, 0);
+};
+
+const array1 = [1, 2, 3, 4, 5];
+const array2 = [10, 20, 30];
+const array3 = [100, 200, 300, 400];
+
+const sum1 = array1.sum();
+const sum2 = array2.sum();
+const sum3 = array3.sum();
+
+console.log(sum1); 
+console.log(sum2);
+console.log(sum3); 
+</pre>
+
+
+<h3>Que- Write a JavaScript function to retrieve all the names of object's own and inherited properties.</h3>
+<pre>ans- function getAllPropertyNames(obj) {
+  const propertyNames = [];
+  
+  while (obj !== null) {
+    Object.getOwnPropertyNames(obj).forEach((prop) => {
+      if (!propertyNames.includes(prop)) {
+        propertyNames.push(prop);
+      }
+    });
+    obj = Object.getPrototypeOf(obj);
+  }
+  
+  return propertyNames;
+}
+
+</pre>
+</body>
+</html>
